@@ -56,9 +56,9 @@ export const Autenticate = async (req = request, res = response) => {
     });
 
     // * check if the password is correct
-    let isSame = await crypto.CompareInfo(password, user.password);
+    let match = await crypto.CompareInfo(password, user.password);
 
-    if (!isSame) {
+    if (!match) {
       res
         .status(401)
         .json({ message: `The password do not match, please try again` });
@@ -73,7 +73,8 @@ export const Autenticate = async (req = request, res = response) => {
       },
       config.SECRET,
       {
-        expiresIn: 86400,
+        expiresIn: '24h',
+        algorithm: 'HS512',
       }
     );
 

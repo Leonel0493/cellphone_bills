@@ -4,8 +4,7 @@ import config from "../../config.js";
 /**
  * * Return all roles from user
  * @param {BigInteger} idUser 
- * @returns {null} if error will be
- * @returns {Array} id_rol
+ * @returns {BigInt[] | null}
  */
 export const GetRolesByUser = async (idUser) => {
   try {
