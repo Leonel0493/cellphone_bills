@@ -1,4 +1,4 @@
-import { Users } from "../../models/auth/users.model";
+import { Users } from "../../models/auth/users.model.js";
 
 /**
  * * Verify that the user exists
