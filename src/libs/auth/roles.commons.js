@@ -1,10 +1,10 @@
 import { Roles } from "../../models/auth/roles.model.js";
-import { Op } from 'sequelize'
+import { Op } from "sequelize";
 
 /**
  * * function that review if the user have until one rol
- * @param {Array[string]} roles_aray 
- * @param {Array[string]} idroles_array 
+ * @param {Array[string]} roles_aray
+ * @param {Array[string]} idroles_array
  * @returns {boolean | null}
  */
 export const CompareRoles = async (roles_aray, idroles_array) => {
@@ -28,10 +28,12 @@ export const CompareRoles = async (roles_aray, idroles_array) => {
       return true;
     }
 
-    let haveRole = roles.find((rol) => { 
-      console.log(rol); 
+    let haveRole = roles.find((rol) => {
+      console.log(rol);
       let r = roles_aray.includes(rol);
-      if(r) {return true;}
+      if (r) {
+        return true;
+      }
     });
     console.log(haveRole, roles_aray, roles);
 

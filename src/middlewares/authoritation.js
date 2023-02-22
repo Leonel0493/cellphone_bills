@@ -30,7 +30,7 @@ export const tokenValidator = (req = request, res = response, next) => {
 /**
  * * middleware that verify if the user have the correct role
  * @param {string} roles 
- * @returns 
+ * @returns {status}
  */
 export const tokenRoleValidator = async (roles) => {
   return async function (req = request, res = response, next) {
