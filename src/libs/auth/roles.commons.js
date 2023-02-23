@@ -3,8 +3,8 @@ import { Op } from "sequelize";
 
 /**
  * * function that review if the user have until one rol
- * @param {Array[string]} roles_aray
- * @param {Array[string]} idroles_array
+ * @param {string[]} roles_aray
+ * @param {string[]} idroles_array
  * @returns {boolean | null}
  */
 export const CompareRoles = async (roles_aray, idroles_array) => {

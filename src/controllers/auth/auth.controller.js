@@ -1,20 +1,25 @@
 import jwt from "jsonwebtoken";
 import { Users } from "../../models/auth/users.model.js";
 import { response, request } from "express";
-import { VerifyUser } from "../../libs/auth/user.commons.js";
+import { VerifyUserByUserName } from "../../libs/auth/user.commons.js";
 import * as crypto from "../../libs/general/crypto.commons.js";
 import { GetRolesByUser } from "../../libs/auth/permissions.commons.js";
 import config from "../../config.js";
 
+/**
+ * * Register new user in database
+ * @param {request} req
+ * @param {response} res
+ */
 export const RegisterUser = async (req = request, res = response) => {
   try {
     const { username, password, idEmployee } = req.body;
 
     // * validate that user not exist.
-    let userExist = await VerifyUser(username);
+    let userExist = await VerifyUserByUserName(username);
 
     if (userExist) {
-      res.status(401).json({
+      return res.status(401).json({
         message: `The user ${username} allready exist please select other username.`,
       });
     }
@@ -30,21 +35,26 @@ export const RegisterUser = async (req = request, res = response) => {
       enabled: true,
     });
 
-    res.json({ id: user.id });
+    return res.json({ id: user.id });
   } catch (error) {
-    res.status(500).json(error);
+    return res.status(500).json(error);
   }
 };
 
+/**
+ * * Verify credential to access in system
+ * @param {request} req
+ * @param {response} res
+ */
 export const Autenticate = async (req = request, res = response) => {
   try {
     const { username, password } = req.body;
 
     // * validate if user exist
-    let exist = await VerifyUser(username);
+    let exist = await VerifyUserByUserName(username);
 
     if (!exist) {
-      res
+      return res
         .status(401)
         .json({ message: `The user ${username} not exist please verify.` });
     }
@@ -59,7 +69,7 @@ export const Autenticate = async (req = request, res = response) => {
     let match = await crypto.CompareInfo(password, user.password);
 
     if (!match) {
-      res
+      return res
         .status(401)
         .json({ message: `The password do not match, please try again` });
     }
@@ -73,13 +83,13 @@ export const Autenticate = async (req = request, res = response) => {
       },
       config.SECRET,
       {
-        expiresIn: '24h',
-        algorithm: 'HS512',
+        expiresIn: "24h",
+        algorithm: "HS512",
       }
     );
 
-    res.json({token});
+    return res.json({ token });
   } catch (error) {
-    res.status(500).json(error);
+    return res.status(500).json(error);
   }
 };
