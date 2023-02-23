@@ -6,8 +6,8 @@ import { CompareRoles } from "../libs/auth/roles.commons.js";
 
 /**
  * * middleware that validate if token is correct
- * @param {*} req 
- * @param {*} res 
+ * @param {request} req 
+ * @param {response} res 
  * @param {*} next 
  * @returns {status}
  */
