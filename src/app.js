@@ -1,6 +1,5 @@
 import express from 'express';
 import morgan from 'morgan';
-import countriesRoutes from './routes/catalogs/countries.routes.js';
 import authRoutes from './routes/auth/auth.routes.js';
 import pkg from '../package.json' assert { type: "json"};
 
@@ -16,7 +15,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 // TODO: add routes
-app.use('/api/countries', countriesRoutes);
+
 app.use('/api/auth', authRoutes);
 app.use('/', (req, res) => {
   res.json({

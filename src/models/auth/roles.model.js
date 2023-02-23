@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import { pgResources } from '../../resources_db.js';
+import { pgResources } from '../../context_db.js';
 
 export const Roles = pgResources.define(
   "roles",
