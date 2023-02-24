@@ -1,16 +1,16 @@
-import { DataTypes } from 'sequelize';
-import { pgResources } from '../../context_db.js';
+import {DataTypes} from 'sequelize';
+import { pgCellphoneBills } from '../../context_db.js';
 
-export const Roles = pgResources.define(
-  "roles",
+export const Brands = pgCellphoneBills.define(
+  'cellphone_brands',
   {
-    id: {
+    id:{
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    rol: {
-      type: DataTypes.STRING(25),
+    brand:{
+      type: DataTypes.STRING(50),
       allowNull: false,
     },
     created_by: {
@@ -21,7 +21,7 @@ export const Roles = pgResources.define(
     created_at: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: pgResources.literal("CURRENT_TIMESTAMP"),
+      defaultValue: pgCellphoneBills.literal("CURRENT_TIMESTAMP"),
     },
     modified_by: {
       type: DataTypes.STRING(25),
@@ -37,8 +37,8 @@ export const Roles = pgResources.define(
     },
   },
   {
-    schema: "auth",
-    tableName: "roles",
+    schema: "catalogs",
+    tableName: "cellphone_brands",
     timestamps: false,
   }
 )
